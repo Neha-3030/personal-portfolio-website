@@ -5,10 +5,9 @@ import path from 'path'
 export default defineConfig({
   plugins: [react()],
   
-  // 🔥 GitHub Pages के लिए जरूरी
+  // GitHub Pages base path
   base: '/personal-portfolio-website/',
   
-  // Path aliases
   resolve: {
     alias: {
       "@": path.resolve(__dirname, "./src"),
@@ -17,43 +16,22 @@ export default defineConfig({
     }
   },
   
-  // Dev server
   server: {
     port: 5173,
     host: true,
     open: true,
-    watch: {
-      usePolling: true,
-    },
+    watch: { usePolling: true }
   },
   
-  // 🔥 CLEAN BUILD CONFIG (manualChunks FULLY REMOVED)
+  // 🔥 PERFECT BUILD CONFIG (NO ERRORS)
   build: {
     outDir: 'dist',
-    sourcemap: true,
-    minify: 'terser',
-    target: 'esnext'
+    sourcemap: true
+    // terser हटाया + manualChunks हटाया
   },
   
   preview: {
     port: 4173,
     open: true
-  },
-  
-  css: {
-    devSourcemap: true,
-    preprocessorOptions: {
-      scss: {
-        additionalData: `@import "@/styles/variables.scss";`
-      }
-    }
-  },
-  
-  optimizeDeps: {
-    include: ['react-icons/fi']
-  },
-  
-  esbuild: {
-    target: 'es2020'
   }
 })
