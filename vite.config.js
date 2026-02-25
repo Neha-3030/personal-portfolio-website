@@ -2,11 +2,11 @@ import { defineConfig } from 'vite'
 import react from '@vitejs/plugin-react'
 import path from 'path'
 
-export default defineConfig({
+export default defineConfig(({ mode }) => ({
   plugins: [react()],
   
-  // GitHub Pages base path
-  base: '/personal-portfolio-website/',
+  // 🔥 DEV = '/' | PRODUCTION = '/personal-portfolio-website/'
+  base: mode === 'production' ? '/personal-portfolio-website/' : '/',
   
   resolve: {
     alias: {
@@ -23,15 +23,13 @@ export default defineConfig({
     watch: { usePolling: true }
   },
   
-  // 🔥 PERFECT BUILD CONFIG (NO ERRORS)
   build: {
     outDir: 'dist',
     sourcemap: true
-    // terser हटाया + manualChunks हटाया
   },
   
   preview: {
     port: 4173,
     open: true
   }
-})
+}))
