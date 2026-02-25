@@ -4,8 +4,11 @@ import path from 'path'
 
 export default defineConfig({
   plugins: [react()],
+  
+  // 🔥 GitHub Pages के लिए जरूरी
   base: '/personal-portfolio-website/',
-  // Path aliases for clean imports
+  
+  // Path aliases
   resolve: {
     alias: {
       "@": path.resolve(__dirname, "./src"),
@@ -14,39 +17,29 @@ export default defineConfig({
     }
   },
   
-  // Development server settings
+  // Dev server
   server: {
-    port: 5173,           // Avoid port 3000 conflicts
-    host: true,           // Network access
-    open: true,           // Auto open browser
+    port: 5173,
+    host: true,
+    open: true,
     watch: {
-      usePolling: true,   // Fix for WSL/Docker
+      usePolling: true,
     },
   },
   
-  // Production build optimization
+  // 🔥 CLEAN BUILD CONFIG (manualChunks FULLY REMOVED)
   build: {
     outDir: 'dist',
-    sourcemap: true,      // Debug builds
-    rollupOptions: {
-      output: {
-        manualChunks: {
-          vendor: ['react', 'react-dom'],
-          animations: ['framer-motion']
-        }
-      }
-    },
+    sourcemap: true,
     minify: 'terser',
     target: 'esnext'
   },
   
-  // Preview settings
   preview: {
     port: 4173,
     open: true
   },
   
-  // CSS optimization
   css: {
     devSourcemap: true,
     preprocessorOptions: {
@@ -56,12 +49,10 @@ export default defineConfig({
     }
   },
   
-  // Optimize deps for faster HMR
   optimizeDeps: {
     include: ['react-icons/fi']
   },
   
-  // ESBuild settings
   esbuild: {
     target: 'es2020'
   }
